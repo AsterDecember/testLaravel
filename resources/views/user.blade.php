@@ -49,7 +49,7 @@
               <th>Username</th>
               <th>Email</th>
               <th>Password</th>
-              <th>x</th>
+              <th>Eliminar</th>
             </tr>
           </thead>
           <tbody>
@@ -59,11 +59,19 @@
               <td>{{$user->name}}</td>
               <td>{{$user->email}}</td>
               <td>{{$user->password}}</td>
+              <td>
+                <form action='/user/{{$user->id}}' method="delete">
+                  <button class="btn btn-danger" type="submit">
+                    .I.
+                  </button>
+                </form>
+              </td>
             </tr>
             @endforeach
             
           </tbody>
         </table>
+        @include('flash::message')
 
 
     </div>

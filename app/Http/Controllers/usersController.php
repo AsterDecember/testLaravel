@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+
 
 class usersController extends Controller
 {
@@ -13,7 +16,8 @@ class usersController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('user',['users'=>$users]);
     }
 
     /**
@@ -23,7 +27,7 @@ class usersController extends Controller
      */
     public function create()
     {
-        //
+        return view('signup');
     }
 
     /**
@@ -33,8 +37,18 @@ class usersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $this->validate($request,[
+            'username'=>'required',
+            'email' => 'unique:users', //unique:table
+            'password'=>'required',
+            ]);
+        $User= new User;
+        $User->name=$request->input('name');
+        $User->email=$request->input('email');
+        $User->password=bcrypt($request->input('password'));
+        $User->save();
+        return redirect('user');    
     }
 
     /**
@@ -71,14 +85,23 @@ class usersController extends Controller
         //
     }
 
-    /**
+        /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        if($user = User::find($id)){    
+            $user->delete();
+            Session::flash('message','Success!');
+            return redirect('/user');
+        }
+        else{
+            flash('Error!');
+            return redirect('/user/create ');
+        }
         //
     }
 }

@@ -13,7 +13,7 @@
 
 <body>
   <body>
-          @extends('navbar');
+          @extends('navbar')
 
 	<div class="login">
 		<div class="login-screen">
@@ -35,6 +35,8 @@
 					</div>
 					<button type="submit" class="btn btn-success btn-block">Go</button>
 				</form>
+				<br>
+				@extends('errors')
 			</div>
 		</div>
 	</div>

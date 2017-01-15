@@ -31,17 +31,8 @@ class RoutingController extends Controller
         return view('login');
     }
 
-    public function signup(){
-        return view('signup');
-    }
-
     public function delete(){
         return view('delete');
-    }
-
-    public function user(){
-        $users = User::all();
-        return view('user',['users'=>$users]);
     }
 
     public function logout(){
@@ -50,6 +41,11 @@ class RoutingController extends Controller
     }
 
     public function postLogin(Request $request){
+
+        $this->validate($request,[
+            'username'=>'required',
+            'password'=>'required',
+            ]);
     
         $name = $request->input('username');
         $password = $request->input('password');
@@ -61,26 +57,4 @@ class RoutingController extends Controller
         }
     }
 
-    public function postSignup(Request $request){
-        $User= new User;
-        $User->name=$request->input('name');
-        $User->email=$request->input('email');
-        $User->password=bcrypt($request->input('password'));
-        $User->save();
-        return redirect('user');
-    }
-
-    public function postDelete(Request $request){
-
-        if($user = User::where('name',$request->input('name'))->first()){
-            $user->delete();
-            flash('Success!');
-            return redirect('delete');
-        }else{
-            flash('Error!');
-            return redirect('delete');
-        }
-    }
-
-    
 }

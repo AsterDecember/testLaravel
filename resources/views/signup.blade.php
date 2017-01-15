@@ -12,7 +12,7 @@
 
 <body>
   <body>
-          @extends('navbar');
+          @extends('navbar')
 
 	<div class="login">
 		<div class="login-screen">
@@ -21,7 +21,7 @@
 			</div>
 
 			<div class="login-form">
-				<form action="/auth/signup" method="post">
+				<form action="/user" method="post">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 					<div class="control-group">
 						<input type="text" class="login-field" value="" placeholder="username" name="name" id="signup-name">
@@ -39,6 +39,8 @@
 				   </div>
 				   <button type="submit" class="btn btn-success btn-block">Go</button>
 				</form>
+                <br>
+                @extends('errors')
 			</div>
 		</div>
 	</div>

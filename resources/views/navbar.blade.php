@@ -14,21 +14,19 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/login">Log in</a>
-                    </li>
-                    <li>
-                        <a href="/signup">Sign up</a>
-                    </li>
                     @if(Auth::check())
                     <li>
                         <a href="/user">Users</a>
                     </li>
                     <li>
-                        <a href="/delete">DeleteUser</a>
+                        <a href="/logout">Logout</a>
+                    </li>
+                    @else
+                    <li>
+                        <a href="/user/create">Sign up</a>
                     </li>
                     <li>
-                        <a href="/logout">Logout</a>
+                        <a href="/login">Log in</a>
                     </li>
                     @endif
                 </ul>
