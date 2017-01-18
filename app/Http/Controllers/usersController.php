@@ -39,8 +39,8 @@ class usersController extends Controller
     public function store(Request $request)
     {   
         $this->validate($request,[
-            'username'=>'required',
-            'email' => 'unique:users', //unique:table
+            'name'=>'required',
+            'email' => 'required|unique:users|email', //unique:table
             'password'=>'required',
             ]);
         $User= new User;
@@ -93,15 +93,19 @@ class usersController extends Controller
      */
     public function destroy($id)
     {   
-        if($user = User::find($id)){    
-            $user->delete();
-            Session::flash('message','Success!');
-            return redirect('/user');
+        try{
+            if($user = User::find($id)){   
+                $status_code = 200; 
+                $user->delete();
+                //return redirect('/user');
+            }
+            else{
+                //flash('Error!');
+                //return redirect('/user/create ');
+            }
+        }catch(\Throwable $e){
+            $status_code = 400;
+            $response['error_message']= $e->getMessage();
         }
-        else{
-            flash('Error!');
-            return redirect('/user/create ');
-        }
-        //
     }
 }

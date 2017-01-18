@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html >
-<head>
-  <meta charset="UTF-8">
-  <title>Login Form</title>
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-
-  
-</head>
-
-<body>
-  <body>
-          @extends('navbar')
-
+@extends('welcome')
+@section('content')
 	<div class="login">
 		<div class="login-screen">
 			<div class="app-title">
@@ -44,8 +30,4 @@
 			</div>
 		</div>
 	</div>
-</body>
-  
-  
-</body>
-</html>
+@endsection
