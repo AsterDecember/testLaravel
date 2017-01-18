@@ -9,7 +9,7 @@
 					url:'/user/'+id
 				}).then(function(result){
 					//console.log(result);
-					$window.location.href = '/user';
+						$window.location.href = '/user';
 				},function(error){
 					console.log(error);
 				});

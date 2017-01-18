@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Middleware\Authenticate;
 
 
 class usersController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth')->only('index');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,9 +21,11 @@ class usersController extends Controller
      */
     public function index()
     {
+        $this->middleware('auth');
         $users = User::all();
         return view('user',['users'=>$users]);
     }
+
 
     /**
      * Show the form for creating a new resource.
